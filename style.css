@@ -1,0 +1,420 @@
+/* ===== GLOBAL STYLES ===== */
+/* Основные стили для страниц регистрации и входа */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+/* ===== RESET AND BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* ===== BODY STYLES ===== */
+body {
+    /*white*/
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.registration-container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 700px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== LEFT PANEL STYLES ===== */
+/* Панель с брендингом платформы */
+.left-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #1a3d7c, #2a5cb8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    position: relative;
+}
+
+.back-arrow {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.back-arrow:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-3px);
+}
+
+.back-arrow svg {
+    width: 22px;
+    height: 22px;
+    fill: #000000;
+}
+
+.university-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 80px;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.logo-container {
+    margin-bottom: 10px;
+    margin-top: 60px;
+}
+
+.logo {
+    max-width: 350px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.slogan {
+    /* font-family: 'Montserrat', sans-serif; */
+    font-size: 48px;
+    line-height: 1.4;
+    text-align: left;
+    font-weight: 500;
+    width: 190px;
+}
+
+/* ===== RIGHT PANEL STYLES ===== */
+/* Панель с формой */
+.right-panel {
+    flex: 1.2;
+    background-color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.right-panel-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.right-panel-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.right-panel-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.right-panel-content::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+h1 {
+    margin-bottom: 40px;
+    color: #333;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.name-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.name-field {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.optional {
+    color: #666;
+    font-weight: normal;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #1a3d7c;
+    box-shadow: 0 0 0 3px rgba(26, 61, 124, 0.1);
+}
+
+.role-question {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.role-selection {
+    display: flex;
+    gap: 20px;
+}
+
+.role-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.role-option:hover {
+    border-color: #1a3d7c;
+}
+
+.role-option.selected {
+    border-color: #1a3d7c;
+    background-color: rgba(26, 61, 124, 0.05);
+}
+
+.role-option input {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.role-option label {
+    margin-bottom: 0;
+    cursor: pointer;
+    flex: 1;
+    font-size: 15px;
+}
+
+.btn {
+    width: 100%;
+    padding: 16px;
+    background-color: #1a3d7c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 25px;
+}
+
+.btn:hover {
+    background-color: #0f2a5a;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 30px;
+    color: #666;
+    font-size: 15px;
+}
+
+.login-link a {
+    color: #1a3d7c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.password-error {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 6px;
+    display: none;
+}
+
+/* ===== FORM OPTIONS STYLES ===== */
+/* Для страницы входа */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+    color: #333;
+    margin: 0;
+}
+
+.remember-me input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: relative;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-right: 12px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.remember-me:hover .checkmark {
+    border-color: #1a3d7c;
+}
+
+.remember-me input:checked ~ .checkmark {
+    background-color: #1a3d7c;
+    border-color: #1a3d7c;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.remember-me input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.forgot-password {
+    color: #1a3d7c;
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .forgot-password {
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 1024px) {
+    .registration-container {
+        flex-direction: column;
+        height: auto;
+        max-width: 600px;
+    }
+    
+    .left-panel {
+        padding: 30px;
+        text-align: center;
+    }
+    
+    .right-panel {
+        padding: 40px;
+    }
+    
+    .logo {
+        max-width: 200px;
+        max-height: 120px;
+    }
+    
+    .role-selection {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .right-panel-content {
+        overflow-y: visible;
+        padding-right: 0;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .university-name {
+        text-align: center;
+        margin-top: 60px;
+    }
+    
+    .slogan {
+        text-align: center;
+    }
+}

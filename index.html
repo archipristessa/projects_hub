@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проектная платформа - ГУУ</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип и название -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Основная навигация -->
+                <nav class="nav">
+                    <a href="#about" class="nav-link">О платформе</a>
+                    <a href="#" class="nav-link">Проекты</a>
+                    <a href="#" class="nav-link">Команды</a>
+                </nav>
+                
+                <!-- Кнопки авторизации -->
+                <div class="auth-section">
+                    <button class="btn btn-login" onclick="goToLogin()">Войти</button>
+                    <button class="btn btn-registr" onclick="goToRegister()">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main">
+        <div class="container">
+            <div class="hero-section">
+                <!-- Фото университета -->
+                <div class="university-photo-section">
+                    <div class="photo-container">
+                        <img src="images/university-photo_main.png" alt="Государственный Университет Управления" class="university-photo">
+                    </div>
+                </div>
+
+                <!-- Заголовок и описание -->
+                <h1 class="hero-title">Найди тему проекта и команду в ГУУ</h1>
+                <p class="hero-subtitle">Платформа для поиска проектных заданий и формирования команд. Студенты и преподаватели — вместе создаём будущее.</p>
+                
+                <!-- Выбор опций -->
+                <div class="selection-section">
+                    <div class="selection-title">Что Вас интересует?</div>
+                    <div class="options-grid">
+                        <div class="option-card" onclick="selectOption(1)">
+                            <div class="option-icon">🔍</div>
+                            <h3 class="option-title">Найти проект</h3>
+                            <p class="option-description">Найдите интересный проект для реализации</p>
+                        </div>
+                        <div class="option-card" onclick="selectOption(2)">
+                            <div class="option-icon">👥</div>
+                            <h3 class="option-title">Найти команду</h3>
+                            <p class="option-description">Найдите единомышленников для вашего проекта</p>
+                        </div>
+                        <div class="option-card" onclick="selectOption(3)">
+                            <div class="option-icon">🚀</div>
+                            <h3 class="option-title">Создать проект</h3>
+                            <p class="option-description">Разместите свой проект и пригласите участников</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <!-- Основной заголовок -->
+                <h1 class="about-main-title">О НАС</h1>
+                <p class="about-subtitle">Превращаем идеи в проекты, а студентов — в сильные команды.</p>
+                
+                <!-- Миссия -->
+                <!-- <div class="mission-section">
+                    <h2>Наша Миссия</h2>
+                    <p>Мы стремимся трансформировать образовательный процесс в Государственном Университете Управления, предоставляя цифровую экосистему, где рождаются сильные команды и реализуются прорывные проекты. Наша цель — стереть барьеры между теорией и практикой, позволяя каждому студенту найти свой идеальный проект и команду.</p>
+                </div> -->
+                
+                <div class="mission-image-section">
+                    <div class="mission-image-container">
+                        <img src="images/dokidoki.jpg" alt="Наша миссия в действии" class="mission-image">
+                    </div>
+                </div>
+
+                <!-- Предложения -->
+                <div class="offers-section">
+                    <h2>Что мы предлагаем</h2>
+                    
+                    <div class="offers-container">
+                        <!-- Для студентов -->
+                        <div class="offer-category">
+                            <div class="category-header">
+                                <div class="category-icon">🎓</div>
+                                <h3>Для студентов</h3>
+                            </div>
+                            <!-- <h3>Для студентов</h3> -->
+                            <div class="offer-cards">
+                                <div class="offer-card">
+                                    <div class="offer-number">1</div>
+                                    <div class="offer-content">
+                                        <strong>Найти проект</strong>
+                                        <p>Интересные задачи от компаний-партнеров для применения знаний на практике</p>
+                                    </div>
+                                </div>
+                                <div class="offer-card">
+                                    <div class="offer-number">2</div>
+                                    <div class="offer-content">
+                                        <strong>Найти команду</strong>
+                                        <p>Объединяйтесь с однокурсниками для успешной реализации ваших идей</p>
+                                    </div>
+                                </div>
+                                <div class="offer-card">
+                                    <div class="offer-number">3</div>
+                                    <div class="offer-content">
+                                        <strong>Развивать навыки</strong>
+                                        <p>Получайте практический опыт, который ценится будущими работодателями</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Разделитель -->
+                        <div class="category-divider"></div>
+                        
+                        <!-- Для преподавателей -->
+                        <div class="offer-category">
+                            <div class="category-header">
+                                <div class="category-icon">👨‍🏫</div>
+                                <h3>Для преподавателей</h3>
+                            </div>
+                            <!-- <h3>Для преподавателей</h3> -->
+                            <div class="offer-cards">
+                                <div class="offer-card">
+                                    <div class="offer-number">1</div>
+                                    <div class="offer-content">
+                                        <strong>Создать проект</strong>
+                                        <p>Размещайте проектные задания и находите студентов с нужными компетенциями</p>
+                                    </div>
+                                </div>
+                                <div class="offer-card">
+                                    <div class="offer-number">2</div>
+                                    <div class="offer-content">
+                                        <strong>Формировать команды</strong>
+                                        <p>Эффективно подбирать талантливых исполнителей для своих научных и прикладных исследований</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Преимущества -->
+                <div class="features-section">
+                    <h2>Почему выбирают нас?</h2>
+                    
+                    <div class="features-grid-new">
+                        <div class="features-column">
+                            <div class="feature-card-new">
+                                <!--🎯 👥 ✨ 🚀-->
+                                <div class="feature-icon">
+                                    <img src="images/icons/centralization-icon.svg" alt="Централизация" class="feature-icon-img">
+                                </div>
+                                <h3>Централизация</h3>
+                                <p>Больше не нужно искать команду в чатах и соцсетях. Все проекты ГУУ, участники и возможности собраны на одной платформе.</p>
+                            </div>
+                            
+                            <div class="feature-card-new">
+                                <div class="feature-icon">
+                                    <img src="images/icons/community-icon.svg" alt="Сообщество" class="feature-icon-img">
+                                </div>
+                                <h3>Сообщество</h3>
+                                <p>Объединяем студентов разных курсов и направлений для создания сильных междисциплинарных команд.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="features-column">
+                            <div class="feature-card-new">
+                                <div class="feature-icon">
+                                    <img src="images/icons/simplicity-icon.svg" alt="Простота" class="feature-icon-img">
+                                </div>
+                                <h3>Простота</h3>
+                                <p>Интуитивный интерфейс без сложных настроек. Создайте проект или найдите команду всего за несколько кликов.</p>
+                            </div>
+                            
+                            <div class="feature-card-new">
+                                <div class="feature-icon">
+                                    <img src="images/icons/practice-icon.svg" alt="Практико-ориентированность" class="feature-icon-img">
+                                </div>
+                                <h3>Практико-ориентированность</h3>
+                                <p>Каждая идея находит практическое применение. От учебных заданий до стартапов с потенциалом коммерциализации.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Команда проекта -->
+                <div class="team-section">
+                    <h2>Команда проекта</h2>
+                    
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/team-member1.png" alt="Project-manager/Аналитик">
+                            </div>
+                            <h3>Орлова Екатерина</h3>
+                            <p class="member-role">Project-manager/Аналитик</p> <!-- Изменил class с member-name на member-role -->
+                        </div>
+                        
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/team-member2.jpg" alt="Backend-разработчик/DevOps">
+                            </div>
+                            <h3>Мироненкова Валерия</h3>
+                            <p class="member-role">Backend-разработчик/DevOps</p> <!-- Изменил class с member-name на member-role -->
+                        </div>
+                        
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/team-member3.png" alt="Backend-разработчик/Тестировщик">
+                            </div>
+                            <h3>Исобаева Дарья</h3> <!-- Исправил: закрывающий тег был </p> вместо </h3> -->
+                            <p class="member-role">Backend-разработчик/Тестировщик</p> <!-- Изменил class с member-name на member-role -->
+                        </div>
+                        
+                        <div class="team-member">
+                            <div class="member-photo">
+                                <img src="images/team-member4.png" alt="Frontend-разработчик/Дизайнер">
+                            </div>
+                            <h3>Бронина Алина</h3>
+                            <p class="member-role">Frontend-разработчик/Дизайнер</p> <!-- Изменил class с member-name на member-role -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Логотип в футере -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name footer-university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Навигация в футере -->
+                <nav class="nav footer-nav">
+                    <a href="#about" class="nav-link footer-nav-link">О платформе</a>
+                    <a href="#" class="nav-link footer-nav-link">Проекты</a>
+                    <a href="#" class="nav-link footer-nav-link">Команды</a>
+                </nav>
+                
+                <!-- Информация в футере -->
+                <div class="footer-info">
+                    <p>© 2025 Государственный Университет Управления</p>
+                    <p>Проектная платформа ГУУ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        function selectOption(option) {
+            alert(`Выбрана опция: ${option}`);
+        }
+
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function goToRegister() {
+            window.location.href = 'registrr.html';
+        }
+    </script>
+</body>
+</html>
