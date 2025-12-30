@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разработка MVP системы подбора проектных заданий - Проектная платформа ГУУ</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="project-details.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип и название -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Основная навигация -->
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">О платформе</a>
+                    <a href="projects.html" class="nav-link">Проекты</a>
+                    <a href="#" class="nav-link">Команды</a>
+                </nav>
+                
+                <!-- Кнопки авторизации -->
+                <div class="auth-section">
+                    <button class="btn btn-login" onclick="goToLogin()">Войти</button>
+                    <button class="btn btn-registr" onclick="goToRegister()">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BREADCRUMBS ===== -->
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="projects.html" class="breadcrumb-link">Проекты</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="breadcrumb-current">Разработка MVP системы подбора проектных заданий</span>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main project-detail-main">
+        <div class="container">
+            <!-- Заголовок и мета-информация -->
+            <div class="project-header">
+                <div class="project-meta">
+                    <span class="project-badge student-badge">Студенческий проект</span>
+                    <span class="project-badge status-looking-badge">
+                        <i class="fas fa-users"></i> Ищет команду
+                    </span>
+                    <span class="project-date">
+                        <i class="far fa-calendar"></i> Создан: 25.09.2025
+                    </span>
+                </div>
+                
+                <h1 class="project-title">Разработка MVP системы подбора проектных заданий</h1>
+                
+                <div class="author-section">
+                    <div class="author-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="author-info">
+                        <div class="author-name">Боронина Алина Сергеевна</div>
+                        <div class="author-role">Студент, Project Manager</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основной контент проекта -->
+            <div class="project-content">
+                <!-- Левая колонка: описание и детали -->
+                <div class="project-details">
+                    <!-- Описание проекта -->
+                    <section class="project-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-file-alt"></i> Описание проекта
+                        </h2>
+                        <div class="section-content">
+                            <p>Создать веб-приложение, которое позволит студентам легко находить друг друга для совместной работы над проектами на основе общих интересов и комплементарных навыков.</p>
+                            
+                            <h3>Цели:</h3>
+                            <ul class="goals-list">
+                                <li>Централизованная платформа для поиска команды</li>
+                                <li>Упрощение процесса формирования проектных групп</li>
+                                <li>Повышение эффективности студенческих проектов</li>
+                            </ul>
+                            
+                            <h3>Ожидаемые результаты:</h3>
+                            <ul class="results-list">
+                                <li>Работающее веб-приложение</li>
+                                <li>Документация по проекту</li>
+                                <li>Развернутая система на сервере</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Технологии и навыки -->
+                    <section class="project-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-code"></i> Технологии и навыки
+                        </h2>
+                        <div class="section-content">
+                            <div class="skills-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">UI/UX</span>
+                                <span class="skill-tag">Data Science</span>
+                                <span class="skill-tag">Django</span>
+                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">Machine Learning</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Требуемые роли -->
+                    <section class="project-section">
+                        <h2 class="section-title">
+                            <i class="fas fa-user-plus"></i> Требуемые роли
+                        </h2>
+                        <div class="section-content">
+                            <div class="roles-list">
+                                <div class="role-card">
+                                    <div class="role-header">
+                                        <h3 class="role-title">Бэкенд-разработчик</h3>
+                                        <span class="role-count">x1</span>
+                                    </div>
+                                    <div class="role-skills">
+                                        <strong>Навыки:</strong> Python, Django, PostgreSQL
+                                    </div>
+                                    <p class="role-description">Разработка серверной части приложения</p>
+                                </div>
+                                
+                                <div class="role-card">
+                                    <div class="role-header">
+                                        <h3 class="role-title">UI/UX дизайнер</h3>
+                                        <span class="role-count">x1</span>
+                                    </div>
+                                    <div class="role-skills">
+                                        <strong>Навыки:</strong> Figma, Research, Prototyping
+                                    </div>
+                                    <p class="role-description">Создание интерфейса и пользовательского опыта</p>
+                                </div>
+                                
+                                <div class="role-card">
+                                    <div class="role-header">
+                                        <h3 class="role-title">Дата-сайентист</h3>
+                                        <span class="role-count">x1</span>
+                                    </div>
+                                    <div class="role-skills">
+                                        <strong>Навыки:</strong> Data Analysis, ML, Python
+                                    </div>
+                                    <p class="role-description">Аналитика и машинное обучение</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Правая колонка: команда и действия -->
+                <div class="project-sidebar">
+                    <!-- Текущая команда -->
+                    <section class="sidebar-section">
+                        <h2 class="sidebar-title">
+                            <i class="fas fa-users"></i> Текущая команда
+                        </h2>
+                        <div class="current-team">
+                            <div class="team-member-card">
+                                <div class="team-member-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="team-member-info">
+                                    <h4 class="team-member-name">Боронина Алина Сергеевна</h4>
+                                    <p class="team-member-role">Project Manager</p>
+                                    <div class="team-member-skills">
+                                        <span class="mini-skill-tag">Python</span>
+                                        <span class="mini-skill-tag">Django</span>
+                                        <span class="mini-skill-tag">Management</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Действия для не автора -->
+                    <section class="sidebar-section">
+                        <h2 class="sidebar-title">
+                            <i class="fas fa-rocket"></i> Присоединиться к проекту
+                        </h2>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-favorite">
+                                <i class="far fa-star"></i> Добавить в избранное
+                            </button>
+                            <button class="btn-action btn-contact">
+                                <i class="fas fa-envelope"></i> Связаться с автором
+                            </button>
+                            <button class="btn-action btn-apply main-action">
+                                <i class="fas fa-user-plus"></i> Откликнуться на проект
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Действия для автора (скрыто по умолчанию) -->
+                    <section class="sidebar-section author-actions" style="display: none;">
+                        <h2 class="sidebar-title">
+                            <i class="fas fa-cog"></i> Управление проектом
+                        </h2>
+                        <div class="action-buttons">
+                            <button class="btn-action btn-edit">
+                                <i class="fas fa-edit"></i> Редактировать проект
+                            </button>
+                            <button class="btn-action btn-applications">
+                                <i class="fas fa-list"></i> Просмотреть заявки
+                            </button>
+                            <button class="btn-action btn-close">
+                                <i class="fas fa-lock"></i> Закрыть набор
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Статистика -->
+                    <section class="sidebar-section">
+                        <h2 class="sidebar-title">
+                            <i class="fas fa-chart-bar"></i> Статистика
+                        </h2>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-number">12</div>
+                                <div class="stat-label">Просмотров</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3</div>
+                                <div class="stat-label">Откликов</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1/4</div>
+                                <div class="stat-label">Участников</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Логотип в футере -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name footer-university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Навигация в футере -->
+                <nav class="nav footer-nav">
+                    <a href="index.html" class="nav-link footer-nav-link">О платформе</a>
+                    <a href="projects.html" class="nav-link footer-nav-link">Проекты</a>
+                    <a href="#" class="nav-link footer-nav-link">Команды</a>
+                </nav>
+                
+                <!-- Информация в футере -->
+                <div class="footer-info">
+                    <p>© 2025 Государственный Университет Управления</p>
+                    <p>Проектная платформа ГУУ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function goToRegister() {
+            window.location.href = 'registrr.html';
+        }
+
+        // Обработка кнопок действий
+        document.querySelectorAll('.btn-action').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const action = this.textContent.trim();
+                
+                if (action.includes('Откликнуться')) {
+                    alert('Заявка отправлена! Автор проекта свяжется с вами для обсуждения деталей.');
+                    this.innerHTML = '<i class="fas fa-check"></i> Заявка отправлена';
+                    this.disabled = true;
+                    this.classList.add('btn-joined');
+                } else if (action.includes('Избранное')) {
+                    if (this.querySelector('.far')) {
+                        this.innerHTML = '<i class="fas fa-star"></i> В избранном';
+                        alert('Проект добавлен в избранное');
+                    } else {
+                        this.innerHTML = '<i class="far fa-star"></i> Добавить в избранное';
+                        alert('Проект удален из избранного');
+                    }
+                } else if (action.includes('Связаться')) {
+                    alert('Форма связи с автором будет открыта в новом окне');
+                }
+            });
+        });
+
+        // Переключение между видами для автора/не автора (для демонстрации)
+        const toggleAuthorView = () => {
+            const authorActions = document.querySelector('.author-actions');
+            const userActions = document.querySelectorAll('.action-buttons')[1];
+            
+            if (authorActions.style.display === 'none') {
+                authorActions.style.display = 'block';
+                userActions.style.display = 'none';
+            } else {
+                authorActions.style.display = 'none';
+                userActions.style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
