@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог проектов - Проектная платформа ГУУ</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="projects.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип и название -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Основная навигация -->
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">О платформе</a>
+                    <a href="projects.html" class="nav-link active">Проекты</a>
+                    <a href="#" class="nav-link">Команды</a>
+                </nav>
+                
+                <!-- Кнопки авторизации -->
+                <div class="auth-section">
+                    <button class="btn btn-login" onclick="goToLogin()">Войти</button>
+                    <button class="btn btn-registr" onclick="goToRegister()">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main projects-main">
+        <div class="container">
+            <!-- Заголовок и фильтры -->
+            <div class="projects-header">
+                <h1 class="page-title">Каталог проектов</h1>
+                <p class="page-subtitle">Найдите интересный проект для реализации или станьте его автором</p>
+                
+                <!-- Фильтры и поиск -->
+                <div class="projects-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" class="search-input" placeholder="Поиск проектов по названию или описанию...">
+                    </div>
+                    
+                    <div class="filters">
+                        <div class="filter-group">
+                            <select class="filter-select" id="direction-filter">
+                                <option value="">Все направления</option>
+                                <option value="it">Информационные технологии</option>
+                                <option value="marketing">Маркетинг и реклама</option>
+                                <option value="design">Дизайн и UX/UI</option>
+                                <option value="analytics">Аналитика и Data Science</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <select class="filter-select" id="skill-filter">
+                                <option value="">Все навыки</option>
+                                <option value="uiux">UI/UX</option>
+                                <option value="python">Python</option>
+                                <option value="datascience">Data Science</option>
+                                <option value="webdev">Web Development</option>
+                                <option value="mobile">Mobile Development</option>
+                                <option value="analytics">Аналитика</option>
+                                <option value="design">Дизайн</option>
+                                <option value="marketing">Маркетинг</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-filter">
+                            <i class="fas fa-sliders-h"></i> Доп. фильтры
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Сетка проектов -->
+            <div class="projects-grid">
+                <!-- Пример карточки проекта 1 -->
+                <div class="project-card" data-direction="it" data-skills="uiux,datascience,python,machinelearning">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Разработка AI системы подбора проектных заданий</h3>
+                        <span class="project-badge teacher-badge">От преподавателя</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Создать веб-приложение, которое позволит студентам легко находить друг друга для совместной работы над проектами на основе общих интересов и комплементарных навыков.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Data Science</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-looking">
+                            <i class="fas fa-users"></i> Ищет команду
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Боронина Алина Сергеевна</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-join">
+                        <i class="fas fa-user-plus"></i> Записаться
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 2 -->
+                <div class="project-card" data-direction="design" data-skills="flutter,firebase,uiux,dart">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Мобильное приложение для управления личными финансами</h3>
+                        <span class="project-badge student-badge">Студенческий проект</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Разработка кроссплатформенного мобильного приложения для учета доходов и расходов с аналитикой и персонализированными рекомендациями.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Firebase</span>
+                        <span class="skill-tag">UI/UX</span>
+                        <span class="skill-tag">Dart</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-looking">
+                            <i class="fas fa-users"></i> Ищет команду
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Иванов Петр Сергеевич</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-join">
+                        <i class="fas fa-user-plus"></i> Записаться
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 3 -->
+                <div class="project-card" data-direction="analytics" data-skills="analytics,marketing,research">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Анализ рынка EdTech решений для вузов</h3>
+                        <span class="project-badge teacher-badge">От преподавателя</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Проведение комплексного исследования рынка образовательных технологий и разработка рекомендаций по внедрению цифровых инструментов в учебный процесс.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">Аналитика</span>
+                        <span class="skill-tag">Маркетинг</span>
+                        <span class="skill-tag">Исследования</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-full">
+                            <i class="fas fa-check-circle"></i> Команда собрана
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Смирнова Ольга Викторовна</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-view" disabled>
+                        <i class="fas fa-eye"></i> Просмотр
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 4 -->
+                <div class="project-card" data-direction="it" data-skills="react,nodejs,mongodb,uiux">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Веб-платформа для краудфандинга студенческих проектов</h3>
+                        <span class="project-badge student-badge">Студенческий проект</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Создание платформы для сбора средств на реализацию студенческих инициатив с системой рейтингов и отчетности.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">UI/UX</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-looking">
+                            <i class="fas fa-users"></i> Ищет команду
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Козлов Дмитрий Анатольевич</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-join">
+                        <i class="fas fa-user-plus"></i> Записаться
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 5 -->
+                <div class="project-card" data-direction="analytics" data-skills="python,tensorflow,audio,ai">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Разработка системы распознавания эмоций по голосу</h3>
+                        <span class="project-badge teacher-badge">От преподавателя</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Создание ML-модели для анализа эмоциональной окраски голоса с возможностью интеграции в call-центры и системы поддержки клиентов.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Аудиообработка</span>
+                        <span class="skill-tag">AI</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-looking">
+                            <i class="fas fa-users"></i> Ищет команду
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Петров Алексей Иванович</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-join">
+                        <i class="fas fa-user-plus"></i> Записаться
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 6 -->
+                <div class="project-card" data-direction="management" data-skills="algorithms,java,optimization,graphs">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Оптимизация логистических маршрутов для доставки</h3>
+                        <span class="project-badge student-badge">Студенческий проект</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Разработка алгоритма оптимизации маршрутов доставки с учетом множества факторов: пробки, погода, приоритет заказов.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">Алгоритмы</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">Оптимизация</span>
+                        <span class="skill-tag">Графы</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-full">
+                            <i class="fas fa-check-circle"></i> Команда собрана
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Васильева Мария Петровна</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-view" disabled>
+                        <i class="fas fa-eye"></i> Просмотр
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 7 -->
+                <div class="project-card" data-direction="economics" data-skills="analytics,finance,excel,sql">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Анализ инвестиционной привлекательности стартапов</h3>
+                        <span class="project-badge teacher-badge">От преподавателя</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Разработка методологии оценки инвестиционной привлекательности IT-стартапов на ранних стадиях с использованием финансовых и нефинансовых показателей.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">Финансовый анализ</span>
+                        <span class="skill-tag">Excel</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Бизнес-анализ</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-looking">
+                            <i class="fas fa-users"></i> Ищет команду
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Сидоров Андрей Владимирович</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-join">
+                        <i class="fas fa-user-plus"></i> Записаться
+                    </button>
+                </div>
+
+                <!-- Пример карточки проекта 8 -->
+                <div class="project-card" data-direction="marketing" data-skills="smm,analytics,content,seo">
+                    <div class="project-card-header">
+                        <h3 class="project-title">Digital-стратегия для студенческого кафе</h3>
+                        <span class="project-badge student-badge">Студенческий проект</span>
+                    </div>
+                    
+                    <p class="project-description">
+                        Разработка комплексной digital-стратегии для студенческого кафе на территории кампуса с акцентом на социальные сети и локальный маркетинг.
+                    </p>
+                    
+                    <div class="project-skills">
+                        <span class="skill-tag">SMM</span>
+                        <span class="skill-tag">Контент-маркетинг</span>
+                        <span class="skill-tag">SEO</span>
+                        <span class="skill-tag">Аналитика</span>
+                    </div>
+                    
+                    <div class="project-card-footer">
+                        <span class="project-status status-looking">
+                            <i class="fas fa-users"></i> Ищет команду
+                        </span>
+                        <div class="project-author">
+                            <i class="fas fa-user"></i>
+                            <span>Кузнецова Елена Дмитриевна</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-project-join">
+                        <i class="fas fa-user-plus"></i> Записаться
+                    </button>
+                </div>
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination">
+                <button class="pagination-btn prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Назад
+                </button>
+                
+                <div class="pagination-pages">
+                    <span class="page-number active">1</span>
+                    <span class="page-number">2</span>
+                    <span class="page-number">3</span>
+                    <span class="page-dots">...</span>
+                    <span class="page-number">10</span>
+                </div>
+                
+                <button class="pagination-btn next">
+                    Вперед <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Логотип в футере -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name footer-university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Навигация в футере -->
+                <nav class="nav footer-nav">
+                    <a href="index.html" class="nav-link footer-nav-link">Главная</a>
+                    <a href="projects.html" class="nav-link footer-nav-link active">Проекты</a>
+                    <a href="#" class="nav-link footer-nav-link">Команды</a>
+                </nav>
+                
+                <!-- Информация в футере -->
+                <div class="footer-info">
+                    <p>© 2025 Государственный Университет Управления</p>
+                    <p>Проектная платформа ГУУ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function goToRegister() {
+            window.location.href = 'registrr.html';
+        }
+        
+        // Обработка нажатия кнопки "Записаться"
+        document.querySelectorAll('.btn-project-join').forEach(button => {
+            button.addEventListener('click', function() {
+                const projectTitle = this.closest('.project-card').querySelector('.project-title').textContent;
+                alert(`Вы записались на проект: "${projectTitle}"\nС вами свяжется автор проекта для обсуждения деталей.`);
+                this.innerHTML = '<i class="fas fa-check"></i> Заявка отправлена';
+                this.disabled = true;
+                this.classList.add('btn-joined');
+            });
+        });
+        
+        // Функция применения фильтров
+        function applyFilters() {
+            const searchTerm = document.querySelector('.search-input').value.toLowerCase();
+            const direction = document.getElementById('direction-filter').value;
+            const skill = document.getElementById('skill-filter').value.toLowerCase();
+            
+            document.querySelectorAll('.project-card').forEach(card => {
+                const title = card.querySelector('.project-title').textContent.toLowerCase();
+                const description = card.querySelector('.project-description').textContent.toLowerCase();
+                const skills = Array.from(card.querySelectorAll('.skill-tag')).map(tag => tag.textContent.toLowerCase());
+                const cardDirection = card.getAttribute('data-direction');
+                const cardSkills = card.getAttribute('data-skills').toLowerCase();
+                
+                // Проверка поиска
+                const matchesSearch = !searchTerm || 
+                                      title.includes(searchTerm) || 
+                                      description.includes(searchTerm) || 
+                                      skills.some(s => s.includes(searchTerm));
+                
+                // Проверка направления
+                const matchesDirection = !direction || cardDirection === direction;
+                
+                // Проверка навыка
+                const matchesSkill = !skill || 
+                                     skills.some(s => s.includes(skill)) || 
+                                     cardSkills.includes(skill);
+                
+                // Показываем, если все условия выполняются
+                if (matchesSearch && matchesDirection && matchesSkill) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+        
+        // Поиск проектов
+        const searchInput = document.querySelector('.search-input');
+        searchInput.addEventListener('input', applyFilters);
+        
+        // Фильтрация по направлению
+        const directionFilter = document.getElementById('direction-filter');
+        directionFilter.addEventListener('change', applyFilters);
+        
+        // Фильтрация по навыкам
+        const skillFilter = document.getElementById('skill-filter');
+        skillFilter.addEventListener('change', applyFilters);
+        
+        // Инициализация фильтров
+        applyFilters();
+    </script>
+</body>
+</html>

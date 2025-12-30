@@ -289,6 +289,28 @@ html {
     margin-right: auto;
 }
 
+/* Mission Section */
+.mission-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.mission-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #1a3d7c;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.mission-section p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 /* ===== MISSION IMAGE SECTION ===== */
 /* Стили секции с изображением миссии */
 .mission-image-section {

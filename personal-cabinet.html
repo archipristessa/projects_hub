@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Проекты ГУУ</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="personal-cabinet.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип и название -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Основная навигация -->
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="#" class="nav-link">Проекты</a>
+                    <a href="#" class="nav-link">Команды</a>
+                </nav>
+                
+                <!-- Информация пользователя -->
+                <div class="user-section">
+                    <div class="user-info">
+                        <span class="user-name">Боронина Алина</span>
+                        <span class="user-status">Студент</span>
+                    </div>
+                    <button class="btn btn-logout" onclick="logout()">Выйти</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="personal-cabinet">
+        <div class="container">
+            <div class="cabinet-layout">
+                <!-- Боковая панель -->
+                <aside class="sidebar">
+                    <div class="sidebar-header">
+                        <h2 class="sidebar-title">Мой профиль</h2>
+                    </div>
+                    <nav class="sidebar-nav">
+                        <a href="#" class="sidebar-link active" onclick="showTab('profile')">
+                            <span class="link-icon">👤</span>
+                            Мой профиль
+                        </a>
+                        <a href="#" class="sidebar-link" onclick="showTab('projects')">
+                            <span class="link-icon">📋</span>
+                            Мои проекты
+                        </a>
+                        <a href="#" class="sidebar-link" onclick="showTab('applications')">
+                            <span class="link-icon">📨</span>
+                            Мои заявки
+                        </a>
+                        <a href="#" class="sidebar-link" onclick="showTab('team')">
+                            <span class="link-icon">👥</span>
+                            Моя команда
+                        </a>
+                    </nav>
+                    <div class="sidebar-footer">
+                        <div class="user-avatar">
+                            <img src="images/team-member4.png" alt="Аватар">
+                        </div>
+                        <div class="user-short-info">
+                            <h3>Боронина Алина</h3>
+                            <p>Студент 3 курс</p>
+                            <p>ПИ 3-3</p>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Основной контент -->
+                <div class="cabinet-content">
+                    <!-- Вкладки -->
+                    <div class="content-tabs">
+                        <button class="tab-btn active" data-tab="profile">Мой профиль</button>
+                        <button class="tab-btn" data-tab="projects">Мои проекты</button>
+                        <button class="tab-btn" data-tab="applications">Мои заявки</button>
+                        <button class="tab-btn" data-tab="team">Моя команда</button>
+                    </div>
+
+                    <!-- Контент вкладок -->
+                    <div class="tab-content">
+                        <!-- Вкладка профиля -->
+                        <div id="profile-tab" class="tab-pane active">
+                            <div class="profile-header">
+                                <h1 class="profile-name">Боронина Алина Сергеевна</h1>
+                                <p class="profile-info">Студент 3 курс / ПИ 3-3</p>
+                                <p class="profile-contact">
+                                    <a href="mailto:alina@guu.ru">alina@guu.ru</a>
+                                </p>
+                                <p class="profile-contact">
+                                    GitHub: <a href="https://github.com/alina_guu" target="_blank">github.com/alina_guu</a>
+                                </p>
+                            </div>
+
+                            <!-- Навыки -->
+                            <div class="skills-section">
+                                <h2 class="section-title">Мои навыки</h2>
+                                <div class="skills-container">
+                                    <div class="skill-tag">Python</div>
+                                    <div class="skill-tag">UI/UX</div>
+                                    <div class="skill-tag">Django</div>
+                                    <div class="skill-tag">Data Science</div>
+                                    <div class="skill-tag">PostgreSQL</div>
+                                    <button class="add-skill-btn" onclick="addSkill()">+ Добавить навык</button>
+                                </div>
+                            </div>
+
+                            <!-- Статистика -->
+                            <div class="stats-section">
+                                <h2 class="section-title">Статистика</h2>
+                                <div class="stats-grid">
+                                    <div class="stat-card">
+                                        <h3>Создано проектов</h3>
+                                        <div class="stat-number">3</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <h3>Участвую в проектах</h3>
+                                        <div class="stat-number">1</div>
+                                    </div>
+                                    <div class="stat-card">
+                                        <h3>Откликов отправлено</h3>
+                                        <div class="stat-number">7</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Детальный профиль -->
+                            <div class="detailed-profile">
+                                <h2 class="section-title">Мой профиль</h2>
+                                <div class="profile-details">
+                                    <div class="profile-avatar">
+                                        <img src="images/team-member4.png" alt="Аватар">
+                                        <button class="change-avatar-btn">Изменить аватар</button>
+                                    </div>
+                                    <div class="profile-info-grid">
+                                        <div class="info-item">
+                                            <label>ФИО:</label>
+                                            <span>Боронина Алина Сергеевна</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>Статус:</label>
+                                            <span>Студент 3 курс / ПИ 3-3</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>Email:</label>
+                                            <span><a href="mailto:alina@guu.ru">alina@guu.ru</a></span>
+                                        </div>
+                                        <div class="info-item">
+                                            <label>GitHub:</label>
+                                            <span><a href="https://github.com/alina_guu" target="_blank">github.com/alina_guu</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-edit-profile" onclick="editProfile()">Редактировать профиль</button>
+                            </div>
+                        </div>
+
+                        <!-- Вкладка проектов -->
+                        <div id="projects-tab" class="tab-pane">
+                            <div class="projects-header">
+                                <h2 class="section-title">Мои проекты</h2>
+                                <button class="btn btn-create-project" onclick="createProject()">+ Создать проект</button>
+                            </div>
+                            <div class="projects-list">
+                                <div class="project-card">
+                                    <h3 class="project-title">Разработка платформы для проектов ГУУ</h3>
+                                    <p class="project-description">Создание веб-платформы для поиска проектов и команд в университете</p>
+                                    <div class="project-status status-active">Активен</div>
+                                </div>
+                                <div class="project-card">
+                                    <h3 class="project-title">Анализ данных о студенческой успеваемости</h3>
+                                    <p class="project-description">Исследование факторов, влияющих на успеваемость студентов</p>
+                                    <div class="project-status status-completed">Завершен</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вкладка заявок -->
+                        <div id="applications-tab" class="tab-pane">
+                            <h2 class="section-title">Мои заявки</h2>
+                            <div class="applications-list">
+                                <div class="application-card">
+                                    <h3 class="application-title">Заявка на проект "Разработка мобильного приложения"</h3>
+                                    <p class="application-status status-pending">На рассмотрении</p>
+                                </div>
+                                <div class="application-card">
+                                    <h3 class="application-title">Заявка на проект "AI для анализа текстов"</h3>
+                                    <p class="application-status status-accepted">Принята</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Вкладка команды -->
+                        <div id="team-tab" class="tab-pane">
+                            <h2 class="section-title">Моя команда</h2>
+                            <div class="team-members">
+                                <div class="team-member-card">
+                                    <img src="images/team-member4.png" alt="Участник команды" class="member-avatar">
+                                    <div class="member-info">
+                                        <h3>Боронина Алина</h3>
+                                        <p>Frontend-разработчик</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Логотип в футере -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name footer-university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Навигация в футере -->
+                <nav class="nav footer-nav">
+                    <a href="index.html" class="nav-link footer-nav-link">Главная</a>
+                    <a href="#" class="nav-link footer-nav-link">Проекты</a>
+                    <a href="#" class="nav-link footer-nav-link">Команды</a>
+                </nav>
+                
+                <!-- Информация в футере -->
+                <div class="footer-info">
+                    <p>© 2025 Государственный Университет Управления</p>
+                    <p>Проектная платформа ГУУ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="personal-cabinet.js"></script>
+</body>
+</html>
