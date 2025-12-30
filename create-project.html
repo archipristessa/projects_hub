@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать проект - Проектная платформа ГУУ</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="create-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Логотип и название -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Основная навигация -->
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">О платформе</a>
+                    <a href="projects.html" class="nav-link">Проекты</a>
+                    <a href="#" class="nav-link">Команды</a>
+                </nav>
+                
+                <!-- Кнопки авторизации -->
+                <div class="auth-section">
+                    <button class="btn btn-login" onclick="goToLogin()">Войти</button>
+                    <button class="btn btn-registr" onclick="goToRegister()">Зарегистрироваться</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main create-project-main">
+        <div class="container">
+            <!-- Заголовок и автор -->
+            <div class="create-project-header">
+                <h1 class="page-title">Создайте новый проект</h1>
+                <p class="page-subtitle">Создайте проект с перспективой реального применения</p>
+                
+                <div class="author-info-section">
+                    <div class="author-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="author-details">
+                        <div class="author-name">Боронина Алина Сергеевна</div>
+                        <div class="author-role">
+                            <span class="role-tag student-tag">Студент</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Форма создания проекта -->
+            <form class="project-form" id="createProjectForm">
+                <!-- Основная информация -->
+                <section class="form-section">
+                    <h2 class="form-section-title">Основная информация</h2>
+                    
+                    <div class="form-group">
+                        <label for="project-name" class="form-label">Название проекта *</label>
+                        <input type="text" id="project-name" class="form-input" 
+                               placeholder="Разработка MVP системы подбора проектных заданий" 
+                               required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="project-description" class="form-label">Краткое описание проекта *</label>
+                        <textarea id="project-description" class="form-textarea" rows="4" 
+                                  placeholder="Создать веб-приложение, которое позволит студентам легко находить друг друга для совместной работы над проектами на основе общих интересов и комплементарных навыков."
+                                  required></textarea>
+                    </div>
+                </section>
+
+                <!-- Требуемые роли -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="form-section-title">Требуемые роли</h2>
+                        <button type="button" class="btn-add-role" id="addRoleBtn">
+                            <i class="fas fa-plus"></i> Добавить роль
+                        </button>
+                    </div>
+                    
+                    <div class="roles-container" id="rolesContainer">
+                        <!-- Первая роль (по умолчанию) -->
+                        <div class="role-form-card" data-role-id="1">
+                            <div class="role-form-header">
+                                <h3 class="role-form-title">Роль #1</h3>
+                                <button type="button" class="btn-remove-role" onclick="removeRole(this)">
+                                    <i class="fas fa-times"></i> Удалить
+                                </button>
+                            </div>
+                            
+                            <div class="role-form-fields">
+                                <div class="form-group">
+                                    <label class="form-label">Название роли *</label>
+                                    <input type="text" class="form-input" 
+                                           placeholder="Бэкенд разработчик" 
+                                           required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Количество *</label>
+                                    <select class="form-select" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Требуемые навыки *</label>
+                                    <textarea class="form-textarea skills-textarea" rows="2" 
+                                              placeholder="Python, Django, PostgreSQL, REST API"
+                                              required></textarea>
+                                    <div class="form-hint">Перечислите навыки через запятую</div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Описание роли (необязательно)</label>
+                                    <textarea class="form-textarea" rows="2" 
+                                              placeholder="Разработка серверной части приложения, работа с базой данных, создание API"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Дополнительно -->
+                <section class="form-section">
+                    <h2 class="form-section-title">Дополнительно</h2>
+                    
+                    <div class="form-group">
+                        <label for="detailed-description" class="form-label">Подробное описание проекта</label>
+                        <textarea id="detailed-description" class="form-textarea" rows="6" 
+                                  placeholder="Опишите подробно цели проекта, задачи, ожидаемые результаты, сроки реализации и другие детали..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Добавить файлы</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div class="file-upload-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Перетащите файлы сюда или <span class="browse-link">выберите файлы</span></p>
+                                <p class="file-upload-hint">Поддерживаются PDF, DOC, DOCX, JPG, PNG (макс. 10 МБ)</p>
+                            </div>
+                            <input type="file" id="fileInput" class="file-input" multiple>
+                        </div>
+                        
+                        <div class="file-list" id="fileList">
+                            <!-- Файлы будут отображаться здесь -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Кнопки действий -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-save-draft" id="saveDraftBtn">
+                        Сохранить черновик
+                    </button>
+                    <button type="submit" class="btn btn-publish">
+                        Опубликовать проект
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Логотип в футере -->
+                <div class="logo-section">
+                    <img src="images/Alina_logo_1.png" alt="Логотип ГУУ" class="logo">
+                    <span class="university-name footer-university-name">Проекты ГУУ</span>
+                </div>
+                
+                <!-- Навигация в футере -->
+                <nav class="nav footer-nav">
+                    <a href="index.html" class="nav-link footer-nav-link">О платформе</a>
+                    <a href="projects.html" class="nav-link footer-nav-link">Проекты</a>
+                    <a href="#" class="nav-link footer-nav-link">Команды</a>
+                </nav>
+                
+                <!-- Информация в футере -->
+                <div class="footer-info">
+                    <p>© 2025 Государственный Университет Управления</p>
+                    <p>Проектная платформа ГУУ</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function goToRegister() {
+            window.location.href = 'registrr.html';
+        }
+
+        // Глобальный счетчик ролей
+        let roleCounter = 1;
+
+        // Добавление новой роли
+        document.getElementById('addRoleBtn').addEventListener('click', function() {
+            roleCounter++;
+            const rolesContainer = document.getElementById('rolesContainer');
+            
+            const newRole = document.createElement('div');
+            newRole.className = 'role-form-card';
+            newRole.setAttribute('data-role-id', roleCounter);
+            newRole.innerHTML = `
+                <div class="role-form-header">
+                    <h3 class="role-form-title">Роль #${roleCounter}</h3>
+                    <button type="button" class="btn-remove-role" onclick="removeRole(this)">
+                        <i class="fas fa-times"></i> Удалить
+                    </button>
+                </div>
+                
+                <div class="role-form-fields">
+                    <div class="form-group">
+                        <label class="form-label">Название роли *</label>
+                        <input type="text" class="form-input" placeholder="Например: Frontend разработчик" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Количество *</label>
+                        <select class="form-select" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Требуемые навыки *</label>
+                        <textarea class="form-textarea skills-textarea" rows="2" 
+                                  placeholder="JavaScript, React, HTML, CSS"
+                                  required></textarea>
+                        <div class="form-hint">Перечислите навыки через запятую</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Описание роли (необязательно)</label>
+                        <textarea class="form-textarea" rows="2" 
+                                  placeholder="Разработка пользовательского интерфейса, создание компонентов React, верстка"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            rolesContainer.appendChild(newRole);
+            
+            // Плавная прокрутка к новой роли
+            newRole.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // Удаление роли
+        function removeRole(button) {
+            const roleCard = button.closest('.role-form-card');
+            const rolesContainer = document.getElementById('rolesContainer');
+            const roleCards = rolesContainer.querySelectorAll('.role-form-card');
+            
+            // Не позволяем удалить последнюю роль
+            if (roleCards.length > 1) {
+                roleCard.classList.add('removing');
+                setTimeout(() => {
+                    roleCard.remove();
+                    updateRoleTitles();
+                }, 300);
+            } else {
+                alert('Должна быть хотя бы одна роль в проекте');
+            }
+        }
+
+        // Обновление заголовков ролей
+        function updateRoleTitles() {
+            const roleCards = document.querySelectorAll('.role-form-card');
+            roleCards.forEach((card, index) => {
+                const title = card.querySelector('.role-form-title');
+                title.textContent = `Роль #${index + 1}`;
+            });
+        }
+
+        // Обработка загрузки файлов
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const fileUploadArea = document.getElementById('fileUploadArea');
+
+        fileUploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileUploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.add('dragover');
+        });
+
+        fileUploadArea.addEventListener('dragleave', () => {
+            fileUploadArea.classList.remove('dragover');
+        });
+
+        fileUploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            handleFiles(files);
+        });
+
+        function handleFiles(files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.size > 10 * 1024 * 1024) { // 10 МБ
+                    alert(`Файл "${file.name}" превышает максимальный размер 10 МБ`);
+                    continue;
+                }
+                
+                addFileToList(file);
+            }
+        }
+
+        function addFileToList(file) {
+            const fileId = Date.now();
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.setAttribute('data-file-id', fileId);
+            fileItem.innerHTML = `
+                <div class="file-info">
+                    <i class="fas fa-file"></i>
+                    <div class="file-details">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${formatFileSize(file.size)}</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-remove-file" onclick="removeFile(${fileId})">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            fileList.appendChild(fileItem);
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' байт';
+            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' КБ';
+            else return (bytes / 1048576).toFixed(1) + ' МБ';
+        }
+
+        function removeFile(fileId) {
+            const fileItem = document.querySelector(`[data-file-id="${fileId}"]`);
+            fileItem.classList.add('removing');
+            setTimeout(() => {
+                fileItem.remove();
+            }, 300);
+        }
+
+        // Обработка отправки формы
+        document.getElementById('createProjectForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Валидация формы
+            const projectName = document.getElementById('project-name').value;
+            const projectDescription = document.getElementById('project-description').value;
+            
+            if (!projectName.trim() || !projectDescription.trim()) {
+                alert('Пожалуйста, заполните обязательные поля: Название проекта и Краткое описание');
+                return;
+            }
+            
+            // Проверка ролей
+            const roleCards = document.querySelectorAll('.role-form-card');
+            let validRoles = true;
+            
+            roleCards.forEach((card, index) => {
+                const inputs = card.querySelectorAll('input[required], textarea[required], select[required]');
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        validRoles = false;
+                        input.classList.add('error');
+                    } else {
+                        input.classList.remove('error');
+                    }
+                });
+            });
+            
+            if (!validRoles) {
+                alert('Пожалуйста, заполните все обязательные поля для каждой роли');
+                return;
+            }
+            
+            // Здесь можно отправить данные на сервер
+            console.log('Форма отправлена');
+            
+            // Симуляция успешной отправки
+            alert('Проект успешно создан! Вы будете перенаправлены на страницу проекта.');
+            setTimeout(() => {
+                window.location.href = 'project-detail.html';
+            }, 1000);
+        });
+
+        // Сохранение черновика
+        document.getElementById('saveDraftBtn').addEventListener('click', function() {
+            // Сохранение данных в localStorage (или отправка на сервер)
+            const formData = {
+                projectName: document.getElementById('project-name').value,
+                projectDescription: document.getElementById('project-description').value,
+                detailedDescription: document.getElementById('detailed-description').value,
+                savedAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('projectDraft', JSON.stringify(formData));
+            
+            this.innerHTML = '<i class="fas fa-check"></i> Черновик сохранен';
+            this.classList.add('saved');
+            
+            setTimeout(() => {
+                this.innerHTML = 'Сохранить черновик';
+                this.classList.remove('saved');
+            }, 2000);
+        });
+
+        // Загрузка черновика при загрузке страницы
+        window.addEventListener('load', function() {
+            const draft = localStorage.getItem('projectDraft');
+            if (draft) {
+                const formData = JSON.parse(draft);
+                document.getElementById('project-name').value = formData.projectName || '';
+                document.getElementById('project-description').value = formData.projectDescription || '';
+                document.getElementById('detailed-description').value = formData.detailedDescription || '';
+            }
+        });
+    </script>
+</body>
+</html>
