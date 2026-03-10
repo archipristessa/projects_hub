@@ -1,0 +1,56 @@
+# Базы данных
+*.sqlite3
+*.db
+*.mdb
+/pgdata/
+postgresql/
+*.pid
+*.postgres
+postmaster.*
+
+# Питон кэш
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+.venv
+venv/
+
+# Собранные статические файлы
+/staticfiles/
+/media/
+
+# Логи
+*.log
+logs/
+
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Operating Systems
+# Windows
+Thumbs.db
+Desktop.ini
+\$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+._*
+
+# Linux
+*~
+.directory
+
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak

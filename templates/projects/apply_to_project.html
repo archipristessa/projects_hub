@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Подача заявки на проект {{ project.title }} - ГУУ{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'projects_list' %}">Проекты</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'project_detail' pk=project.pk %}">{{ project.title }}</a></li>
+            <li class="breadcrumb-item active">Подача заявки</li>
+        </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-paper-plane"></i> Подача заявки на проект
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info mb-4">
+                        <h5>Проект: {{ project.title }}</h5>
+                        <p class="mb-2">Автор: {{ project.author.get_full_name|default:project.author.username }}</p>
+                        <p class="mb-0"><small>Статус: {{ project.get_status_display }}</small></p>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <!-- Выбор роли -->
+                        {% if project.needed_roles.all or project.required_roles.all %}
+                        <div class="mb-4">
+                            <label for="role" class="form-label fw-bold">Желаемая роль в проекте:</label>
+                            <select class="form-select" id="role" name="role">
+                                <option value="">-- Выберите роль --</option>
+                                {% for role in project.needed_roles.all %}
+                                    <option value="{{ role.id }}">{{ role.name }}</option>
+                                {% endfor %}
+                                {% for role in project.required_roles.all %}
+                                    <option value="{{ role.id }}">{{ role.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">Укажите, в какой роли вы хотели бы участвовать</div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Сообщение автору -->
+                        <div class="mb-4">
+                            <label for="message" class="form-label fw-bold">Ваше сообщение автору проекта:</label>
+                            <textarea class="form-control" id="message" name="message"
+                                      rows="6"
+                                      placeholder="Расскажите о себе, почему вы хотите участвовать в этом проекте, какие у вас есть навыки и опыт..."
+                                      required></textarea>
+                            <div class="form-text">Это сообщение увидит автор проекта при рассмотрении вашей заявки</div>
+                        </div>
+
+                        <!-- Контактная информация -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Контактная информация:</label>
+                            <div class="alert alert-light">
+                                <p class="mb-1">Автор проекта сможет связаться с вами через:</p>
+                                <ul class="mb-0">
+                                    <li>Email: <strong>{{ user.email }}</strong></li>
+                                    {% if user.student_profile and user.student_profile.phone %}
+                                    <li>Телефон: <strong>{{ user.student_profile.phone }}</strong></li>
+                                    {% endif %}
+                                    {% if user.student_profile and user.student_profile.telegram %}
+                                    <li>Telegram: <strong>{{ user.student_profile.telegram }}</strong></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'project_detail' pk=project.pk %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Назад к проекту
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-paper-plane"></i> Отправить заявку
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

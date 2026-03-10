@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация - Проекты ГУУ</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="registration-container">
+
+        <!-- ===== LEFT PANEL ===== -->
+        <div class="left-panel">
+            <button class="back-arrow" onclick="goToMainPage()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+
+            <div class="logo-container">
+                <img src="{% static 'images/Alina_logo_1.png' %}" alt="Логотип ГУУ" class="logo">
+            </div>
+            <div class="slogan">Найди тему проекта и команду в ГУУ</div>
+        </div>
+
+        <!-- ===== RIGHT PANEL ===== -->
+        <div class="right-panel">
+            <div class="right-panel-content">
+                <form class="registration-form" method="post">
+                    {% csrf_token %}
+
+                    <h1>Регистрация</h1>
+
+                    <!-- Сообщения об ошибках/успехе -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="form-group">
+                        <div class="name-fields">
+                            <div class="name-field">
+                                <label for="last_name">Фамилия*</label>
+                                <input type="text" id="last_name" name="last_name"
+                                       value="{{ request.POST.last_name }}"
+                                       placeholder="Введите фамилию" required>
+                            </div>
+                            <div class="name-field">
+                                <label for="first_name">Имя*</label>
+                                <input type="text" id="first_name" name="first_name"
+                                       value="{{ request.POST.first_name }}"
+                                       placeholder="Введите имя" required>
+                            </div>
+                            <div class="name-field">
+                                <label for="patronymic">Отчество</label>
+                                <input type="text" id="patronymic" name="patronymic"
+                                       value="{{ request.POST.patronymic }}"
+                                       placeholder="Введите отчество">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <input type="email" id="email" name="email"
+                               value="{{ request.POST.email }}"
+                               placeholder="Введите e-mail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password1">Пароль*</label>
+                        <input type="password" id="password1" name="password1"
+                               placeholder="Введите пароль" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password2">Подтверждение пароля*</label>
+                        <input type="password" id="password2" name="password2"
+                               placeholder="Повторите пароль" required>
+                        <div class="password-error" id="password-error" style="display: none;">
+                            Пароли не совпадают
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="role-question">Кто Вы?*</div>
+                        <div class="role-selection">
+                            <div class="role-option" onclick="selectRole('student')">
+                                <input type="radio" id="student" name="user_type" value="student"
+                                       {% if request.POST.user_type == 'student' %}checked{% endif %} required>
+                                <label for="student">Студент</label>
+                            </div>
+                            <div class="role-option" onclick="selectRole('teacher')">
+                                <input type="radio" id="teacher" name="user_type" value="teacher"
+                                       {% if request.POST.user_type == 'teacher' %}checked{% endif %} required>
+                                <label for="teacher">Преподаватель</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">продолжить</button>
+
+                    <div class="login-link">
+                        Уже есть доступ? <a href="{% url 'login' %}">Войдите</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+     <script src="{% static 'js/registration_script.js' %}"></script>
+</body>
+</html>

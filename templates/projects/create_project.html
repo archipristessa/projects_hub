@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Создать новый проект{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Создать новый проект</h3>
+                </div>
+                <div class="card-body">
+                    <!-- Сообщения -->
+                    {% if messages %}
+                    <div class="messages mb-3">
+                        {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <form method="post" id="projectForm">
+                        {% csrf_token %}
+                        
+                        <!-- Название проекта -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Название проекта *</label>
+                            <input type="text" class="form-control" id="title" name="title" 
+                                   value="{{ form_data.title }}" 
+                                   placeholder="Введите название проекта" required maxlength="255">
+                            <div class="form-text">Минимум 3 символа</div>
+                        </div>
+
+                        <!-- Описание проекта -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Описание проекта *</label>
+                            <textarea class="form-control" id="description" name="description" 
+                                      rows="5" placeholder="Опишите ваш проект, его цели и задачи..." 
+                                      required>{{ form_data.description }}</textarea>
+                        </div>
+
+                        <!-- Требования -->
+                        <div class="mb-3">
+                            <label for="requirements" class="form-label">Требования и пожелания</label>
+                            <textarea class="form-control" id="requirements" name="requirements" 
+                                      rows="4" placeholder="Опишите требуемые навыки, технологии, опыт...">{{ form_data.requirements }}</textarea>
+                        </div>
+
+                        <!-- Необходимые роли -->
+                        <div class="mb-3">
+                            <label class="form-label">Необходимые роли в команде</label>
+                            <div class="row">
+                                {% for role in roles %}
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" 
+                                               name="required_roles" value="{{ role.id }}"
+                                               id="role_{{ role.id }}"
+                                               {% if form_data.required_roles and role.id in form_data.required_roles %}checked{% endif %}>
+                                        <label class="form-check-label" for="role_{{ role.id }}">
+                                            {{ role.name }}
+                                        </label>
+                                    </div>
+                                    {% if role.description %}
+                                    <small class="text-muted ms-4">{{ role.description }}</small>
+                                    {% endif %}
+                                </div>
+                                {% empty %}
+                                <div class="col-12">
+                                    <p class="text-muted">Роли еще не созданы администратором</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Статус проекта -->
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Статус проекта</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="active" {% if form_data.status == 'active' or not form_data %}selected{% endif %}>
+                                    Активно ищет команду
+                                </option>
+                                <option value="completed" {% if form_data.status == 'completed' %}selected{% endif %}>
+                                    Команда набрана
+                                </option>
+                                <option value="archived" {% if form_data.status == 'archived' %}selected{% endif %}>
+                                    Архивирован
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Кнопки -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Создать проект
+                            </button>
+                            <a href="{% url 'projects_list' %}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Отмена
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Простой JavaScript для валидации формы на клиенте -->
+<script>
+document.getElementById('projectForm').addEventListener('submit', function(e) {
+    const title = document.getElementById('title').value.trim();
+    const description = document.getElementById('description').value.trim();
+    
+    if (title.length < 3) {
+        e.preventDefault();
+        alert('Название проекта должно содержать минимум 3 символа!');
+        return false;
+    }
+    
+    if (!description) {
+        e.preventDefault();
+        alert('Описание проекта обязательно!');
+        return false;
+    }
+});
+</script>
+{% endblock %}

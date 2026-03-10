@@ -1,0 +1,1118 @@
+/* ===== MAIN.CSS ===== */
+/* Основные стили для главной страницы проектной платформы ГУУ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap');
+
+/* ===== BASE STYLES ===== */
+/* Сброс стилей и базовые настройки */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Основные стили body */
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ===== LAYOUT CONTAINERS ===== */
+/* Основной контейнер для центрирования контента */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== HEADER STYLES ===== */
+/* Стили шапки сайта */
+.header {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Контейнер содержимого шапки */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+
+/* ===== LOGO SECTION STYLES ===== */
+/* Стили секции с логотипом */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.university-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #1a3d7c;
+    font-size: 16px;
+}
+
+/* ===== NAVIGATION STYLES ===== */
+/* Стили основной навигации */
+.nav {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #1a3d7c;
+}
+
+/* ===== AUTH SECTION STYLES ===== */
+/* Стили секции авторизации */
+.auth-section {
+    display: flex;
+    gap: 15px;
+}
+
+/* Базовые стили кнопок */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Стили кнопки входа */
+.btn-login {
+    background: white;
+    border: 2px solid #1a3d7c;
+    color: #1a3d7c;
+}
+
+.btn-login:hover {
+    background: #d9dce4;
+}
+
+/* Стили кнопки регистрации */
+.btn-registr {
+    background: #1a3d7c;
+    color: white;
+    border: 2px solid #1a3d7c;
+}
+
+.btn-registr:hover {
+    background: #0f2a5a;
+}
+
+/* ===== MAIN CONTENT STYLES ===== */
+/* Стили основного контента */
+.main {
+    flex: 1;
+    padding: 40px 0;
+}
+
+.hero-section {
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Заголовок героя */
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    color: #1a3d7c;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Подзаголовок героя */
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== UNIVERSITY PHOTO SECTION ===== */
+/* Стили секции с фото университета */
+.university-photo-section {
+    margin: 50px 0;
+}
+
+.photo-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.university-photo {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== SELECTION SECTION STYLES ===== */
+/* Стили секции выбора опций */
+.selection-section {
+    margin-top: 60px;
+}
+
+.selection-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Сетка опций */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Карточки опций */
+.option-card {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: #1a3d7c;
+}
+
+.option-icon {
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+}
+
+.option-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    color: #1a3d7c;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.option-description {
+    color: #666;
+    line-height: 1.5;
+    font-size: 1.05rem;
+}
+
+/* ===== ABOUT SECTION STYLES ===== */
+/* Стили секции "О нас" */
+.about-section {
+    background: white;
+    padding: 80px 0;
+    margin-top: 40px;
+}
+
+/* Отступ для якорной ссылки */
+#about {
+    scroll-margin-top: 100px;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Основной заголовок секции "О нас" */
+.about-main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    color: #1a3d7c;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.about-subtitle {
+    font-size: 1.4rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 60px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Mission Section */
+.mission-section {
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.mission-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #1a3d7c;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.mission-section p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* ===== MISSION IMAGE SECTION ===== */
+/* Стили секции с изображением миссии */
+.mission-image-section {
+    margin: 50px 0 60px 0;
+}
+
+.mission-image-container {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    max-width: 900px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
+
+.mission-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== OFFERS SECTION STYLES ===== */
+/* Стили секции предложений */
+.offers-section {
+    margin-bottom: 60px;
+}
+
+.offers-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #1a3d7c;
+    margin-bottom: 40px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Контейнер предложений */
+.offers-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-bottom: 40px;
+}
+
+/* Заголовок категории */
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.category-icon {
+    font-size: 2rem;
+}
+
+.offer-category h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: #1a3d7c;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Карточки предложений */
+.offer-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.offer-card {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 4px solid #1a3d7c;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.offer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.offer-number {
+    background: #1a3d7c;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.offer-content {
+    flex: 1;
+}
+
+.offer-content strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.offer-content p {
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* Разделитель категорий */
+.category-divider {
+    width: 2px;
+    background: linear-gradient(180deg, transparent, #e0e0e0, transparent);
+    margin: 0 20px;
+    align-self: stretch;
+}
+
+/* ===== FEATURES SECTION STYLES ===== */
+/* Стили секции преимуществ */
+.features-section {
+    margin-bottom: 80px;
+}
+
+.features-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #1a3d7c;
+    margin-bottom: 50px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Сетка преимуществ */
+.features-grid-new {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.features-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Карточки преимуществ */
+.feature-card-new {
+    background: white;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feature-card-new:hover {
+    border-color: #1a3d7c;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(26, 61, 124, 0.15);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+}
+
+.feature-card-new h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    color: #1a3d7c;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-card-new p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+/* ===== TEAM SECTION STYLES ===== */
+/* Стили секции команды */
+.team-section {
+    margin-bottom: 60px;
+    padding-top: 40px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.team-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    color: #1a3d7c;
+    margin-bottom: 50px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Сетка команды */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-member {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Фото участника команды */
+.member-photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.member-photo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(26, 61, 124, 0.2);
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.team-member h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Роль участника команды */
+.member-role {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ===== FOOTER STYLES ===== */
+/* Стили подвала */
+.footer {
+    background: #1a3d7c;
+    color: white;
+    padding: 30px 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 15px 0;
+}
+
+/* Логотип в подвале */
+.footer .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer .logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.footer-university-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+}
+
+/* Навигация в подвале */
+.footer-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+    font-size: 15px;
+}
+
+.footer-nav-link:hover {
+    color: #a8c6ff;
+}
+
+/* Информация в подвале */
+.footer-info {
+    text-align: right;
+}
+
+.footer-info p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Адаптивные стили для разных устройств */
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 100%;
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-title {
+        font-size: 2.4rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .options-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .features-grid-new {
+        gap: 30px;
+    }
+    
+    .feature-card-new {
+        padding: 30px 25px;
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .footer-content {
+        gap: 25px;
+    }
+    
+    .footer-nav {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Адаптив для планшетов */
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .nav {
+        gap: 15px;
+    }
+
+    .auth-section {
+        flex-direction: column;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .option-card {
+        padding: 30px 20px;
+    }
+    
+    .university-photo {
+        height: 300px;
+    }
+    
+    .about-section {
+        padding: 50px 0;
+        margin-top: 20px;
+    }
+    
+    .about-main-title {
+        font-size: 2.2rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+    }
+    
+    .offers-section h2,
+    .features-section h2,
+    .team-section h2 {
+        font-size: 1.6rem;
+    }
+    
+    .features-grid-new {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .features-column {
+        gap: 25px;
+    }
+    
+    .feature-card-new {
+        padding: 25px 20px;
+    }
+    
+    .feature-icon {
+        font-size: 2.8rem;
+        width: 65px;
+        height: 65px;
+        margin-bottom: 15px;
+    }
+    
+    .feature-card-new h3 {
+        font-size: 1.3rem;
+    }
+    
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+    
+    .member-photo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .team-member h3 {
+        font-size: 1.1rem;
+    }
+    
+    #about {
+        scroll-margin-top: 120px;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+    }
+    
+    .footer .logo-section {
+        order: 1;
+    }
+    
+    .footer-nav {
+        order: 2;
+        gap: 20px;
+    }
+    
+    .footer-info {
+        text-align: center;
+        order: 3;
+    }
+    
+    .container {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Адаптив для мобильных устройств */
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .university-photo {
+        height: 250px;
+    }
+    
+    .selection-title {
+        font-size: 1.5rem;
+    }
+    
+    .about-main-title {
+        font-size: 1.8rem;
+    }
+    
+    .about-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .features-section h2,
+    .team-section h2 {
+        font-size: 1.6rem;
+        margin-bottom: 40px;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .member-photo {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .feature-card-new {
+        padding: 20px 15px;
+    }
+    
+    .feature-icon {
+        font-size: 2.5rem;
+        width: 60px;
+        height: 60px;
+    }
+    
+    .footer-nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .footer-nav-link {
+        font-size: 14px;
+    }
+    
+    .footer-university-name {
+        font-size: 15px;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+/* ===== ЛЕНТА ПРОЕКТОВ ===== */
+.projects-feed-section {
+    margin: 80px 0;
+    padding: 40px 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a3d7c;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.see-all-link {
+    color: #1a3d7c;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.see-all-link:hover {
+    color: #0f2a5a;
+    text-decoration: underline;
+}
+
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.project-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    flex: 1;
+    margin-right: 15px;
+}
+
+.project-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-archived {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.project-description {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.project-author {
+    font-weight: 500;
+}
+
+.project-roles {
+    margin-bottom: 20px;
+}
+
+.role-tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin: 2px 4px 2px 0;
+}
+
+.project-actions {
+    margin-top: auto;
+}
+
+.btn-view-project {
+    display: inline-block;
+    background-color: #1a3d7c;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    width: 100%;
+    border: 2px solid #1a3d7c;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-view-project:hover {
+    background-color: #0f2a5a;
+    border-color: #0f2a5a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 61, 124, 0.3);
+}
+
+
+.no-projects {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+}
+
+.no-projects p {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+/* Ссылки для карточек опций */
+.option-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.option-card-link:hover .option-card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .project-title {
+        margin-right: 0;
+    }
+}

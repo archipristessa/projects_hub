@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Проекты ГУУ</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="registration-container">
+
+        <!-- ===== LEFT PANEL ===== -->
+        <div class="left-panel">
+            <button class="back-arrow" onclick="goToMainPage()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+
+            <div class="logo-container">
+                <img src="{% static 'images/Alina_logo_1.png' %}" alt="Логотип ГУУ" class="logo">
+            </div>
+            <div class="slogan">Найди тему проекта и команду в ГУУ</div>
+        </div>
+
+        <!-- ===== RIGHT PANEL ===== -->
+        <div class="right-panel">
+            <div class="right-panel-content">
+                <form class="registration-form" method="post">
+                    {% csrf_token %}
+
+                    <h1>Вход в систему</h1>
+
+                    <!-- Сообщения об ошибках -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="username">E-mail</label>
+                        <input type="email" id="username" name="username"
+                               value="{{ request.POST.username }}"
+                               placeholder="Введите e-mail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" name="password"
+                               placeholder="Введите пароль" required>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <span class="checkmark"></span>
+                            Запомнить меня
+                        </label>
+                        <a href="#" class="forgot-password">Забыли пароль?</a>
+                    </div>
+
+                    <button type="submit" class="btn">войти</button>
+
+                    <div class="login-link">
+                        Нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+     <script src="{% static 'js/login_script.js' %}"></script>
+</body>
+</html>
+

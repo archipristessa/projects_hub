@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Редактирование профиля студента</h4>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% bootstrap_field form.institute %}
+                            </div>
+                            <div class="col-md-3">
+                                {% bootstrap_field form.course %}
+                            </div>
+                            <div class="col-md-3">
+                                {% bootstrap_field form.group %}
+                            </div>
+                        </div>
+
+                        {% bootstrap_field form.skills %}
+                        {% bootstrap_field form.bio %}
+
+                        <h5 class="mt-4">Контактная информация</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% bootstrap_field form.phone %}
+                            </div>
+                            <div class="col-md-6">
+                                {% bootstrap_field form.telegram %}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% bootstrap_field form.github %}
+                            </div>
+                            <div class="col-md-6">
+                                {% bootstrap_field form.portfolio %}
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                            <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

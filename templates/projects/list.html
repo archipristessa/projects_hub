@@ -1,0 +1,326 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Каталог проектов{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Заголовок и кнопка создания -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Каталог проектов</h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'create_project' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Создать проект
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}?next={% url 'create_project' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Создать проект
+            </a>
+        {% endif %}
+    </div>
+
+    <!-- Фильтры и поиск -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <input type="text"
+                           name="search"
+                           class="form-control"
+                           placeholder="Поиск проектов..."
+                           value="{{ search_query }}">
+                </div>
+                <div class="col-md-4">
+                    <select name="status" class="form-select">
+                        <option value="">Все статусы</option>
+                        <option value="active" {% if status_filter == 'active' %}selected{% endif %}>
+                            Активные
+                        </option>
+                        <option value="completed" {% if status_filter == 'completed' %}selected{% endif %}>
+                            Завершенные
+                        </option>
+                        <option value="archived" {% if status_filter == 'archived' %}selected{% endif %}>
+                            Архивированные
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-outline-primary w-100">Найти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Сетка проектов -->
+    {% if projects %}
+    <div class="projects-grid">
+        {% for project in projects %}
+        <div class="project-card">
+            <div class="project-header">
+                <h3 class="project-title">{{ project.title }}</h3>
+                <span class="project-status status-{{ project.status }}">
+                    {% if project.status == 'active' %}
+                        🔍 Ищет команду
+                    {% elif project.status == 'completed' %}
+                        ✅ Команда набрана
+                    {% else %}
+                        📁 Архивирован
+                    {% endif %}
+                </span>
+            </div>
+
+            <p class="project-description">
+                {{ project.description|truncatewords:30 }}
+            </p>
+
+            <div class="project-meta">
+                <div class="project-author">
+                    <strong>Автор:</strong> {{ project.author.get_full_name|default:project.author.username }}
+                </div>
+                <div class="project-date">
+                    {{ project.created_at|date:"d.m.Y" }}
+                </div>
+            </div>
+
+            {% if project.required_roles.all %}
+            <div class="project-roles">
+                <strong>Требуются:</strong>
+                {% for role in project.required_roles.all %}
+                <span class="role-tag">{{ role.name }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+           <div class="project-actions">
+    {% if user.is_authenticated %}
+        <!-- Для авторизованного пользователя - на детальную страницу -->
+        <a href="{% url 'project_detail' project.pk %}" class="btn-view-project">
+            Подробнее
+        </a>
+    {% else %}
+        <!-- Для неавторизованного - на вход с редиректом на детальную страницу -->
+        <a href="{% url 'login' %}?next={% url 'project_detail' project.pk %}" class="btn-view-project">
+            Подробнее
+        </a>
+    {% endif %}
+                {% if user.is_authenticated and project.author != user %}
+                <form method="post" action="{% url 'apply_to_project' project.pk %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-apply">
+                        Подать заявку
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-projects text-center py-5">
+        <h3>Проекты не найдены</h3>
+        <p class="text-muted">Попробуйте изменить параметры поиска или создайте первый проект!</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'create_project' %}" class="btn btn-primary mt-3">
+            Создать первый проект
+        </a>
+        {% else %}
+        <a href="{% url 'register' %}" class="btn btn-primary mt-3">
+            Зарегистрироваться
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Пагинация (если нужно) -->
+    {% if is_paginated %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">Предыдущая</a>
+            </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+            <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">{{ num }}</a>
+            </li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&search={{ search_query }}{% endif %}{% if status_filter %}&status={{ status_filter }}{% endif %}">Следующая</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<style>
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.project-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.project-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    flex: 1;
+    margin-right: 15px;
+}
+
+.project-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-active {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-completed {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-archived {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.project-description {
+    color: #6c757d;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.project-author {
+    font-weight: 500;
+}
+
+.project-roles {
+    margin-bottom: 20px;
+}
+
+.role-tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    margin: 2px 4px 2px 0;
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn-view-project {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    flex: 1;
+}
+
+.btn-view-project:hover {
+    background-color: #2980b9;
+    color: white;
+}
+
+.btn-apply {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    flex: 1;
+    cursor: pointer;
+}
+
+.btn-apply:hover {
+    background-color: #218838;
+}
+
+.no-projects {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    border: 2px dashed #dee2e6;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .project-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .project-title {
+        margin-right: 0;
+    }
+
+    .project-actions {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}

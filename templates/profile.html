@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>Личный кабинет</h3>
+<!--                    <a href="{% url 'edit_profile' %}" class="btn btn-primary btn-sm">Редактировать профиль</a>-->
+                    <a href="/users/profile/edit/" class="btn btn-primary btn-sm">Редактировать профиль</a>
+                </div>
+                <div class="card-body">
+<!--                    {% if messages %}-->
+<!--                        {% for message in messages %}-->
+<!--                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">-->
+<!--                                {{ message }}-->
+<!--                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
+<!--                            </div>-->
+<!--                        {% endfor %}-->
+<!--                    {% endif %}-->
+
+                    <h4>Основная информация</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-4"><strong>ФИО:</strong></div>
+                        <div class="col-md-8">{{ user.last_name }} {{ user.first_name }} {{ user.patronymic }}</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-4"><strong>Email:</strong></div>
+                        <div class="col-md-8">{{ user.email }}</div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-4"><strong>Тип пользователя:</strong></div>
+                        <div class="col-md-8">
+                            {% if user.user_type == 'student' %}Студент{% endif %}
+                            {% if user.user_type == 'teacher' %}Преподаватель{% endif %}
+                            {% if user.user_type == 'admin' %}Администратор{% endif %}
+                        </div>
+                    </div>
+
+                    <!-- ПРОФИЛЬ СТУДЕНТА -->
+                    {% if user.user_type == 'student' and user.student_profile %}
+                        <hr>
+                        <h4>Профиль студента</h4>
+
+                        {% if user.student_profile.institute %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Институт:</strong></div>
+                                <div class="col-md-8">{{ user.student_profile.institute }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.student_profile.course %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Курс:</strong></div>
+                                <div class="col-md-8">{{ user.student_profile.course }} курс</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.student_profile.group %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Группа:</strong></div>
+                                <div class="col-md-8">{{ user.student_profile.group }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.student_profile.skills %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Навыки:</strong></div>
+                                <div class="col-md-8">{{ user.student_profile.skills|linebreaks }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.student_profile.bio %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>О себе:</strong></div>
+                                <div class="col-md-8">{{ user.student_profile.bio|linebreaks }}</div>
+                            </div>
+                        {% endif %}
+
+                        <!-- Контакты студента -->
+                        {% if user.student_profile.phone or user.student_profile.telegram or user.student_profile.github %}
+                        <hr>
+                        <h5>Контакты</h5>
+                        <div class="row">
+                            {% if user.student_profile.phone %}
+                            <div class="col-md-6 mb-2">
+                                <strong>Телефон:</strong> {{ user.student_profile.phone }}
+                            </div>
+                            {% endif %}
+                            {% if user.student_profile.telegram %}
+                            <div class="col-md-6 mb-2">
+                                <strong>Telegram:</strong> {{ user.student_profile.telegram }}
+                            </div>
+                            {% endif %}
+                            {% if user.student_profile.github %}
+                            <div class="col-md-6 mb-2">
+                                <strong>GitHub:</strong> <a href="{{ user.student_profile.github }}" target="_blank">{{ user.student_profile.github }}</a>
+                            </div>
+                            {% endif %}
+                            {% if user.student_profile.portfolio %}
+                            <div class="col-md-6 mb-2">
+                                <strong>Портфолио:</strong> <a href="{{ user.student_profile.portfolio }}" target="_blank">{{ user.student_profile.portfolio }}</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                    <!-- ПРОФИЛЬ ПРЕПОДАВАТЕЛЯ -->
+                    {% elif user.user_type == 'teacher' and user.teacher_profile %}
+                        <hr>
+                        <h4>Профиль преподавателя</h4>
+
+                        {% if user.teacher_profile.department %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Кафедра:</strong></div>
+                                <div class="col-md-8">{{ user.teacher_profile.department }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.teacher_profile.position %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Должность:</strong></div>
+                                <div class="col-md-8">{{ user.teacher_profile.position }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.teacher_profile.academic_degree %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Ученая степень:</strong></div>
+                                <div class="col-md-8">{{ user.teacher_profile.academic_degree }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.teacher_profile.expertise %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Области экспертизы:</strong></div>
+                                <div class="col-md-8">{{ user.teacher_profile.expertise|linebreaks }}</div>
+                            </div>
+                        {% endif %}
+
+                        {% if user.teacher_profile.bio %}
+                            <div class="row mb-2">
+                                <div class="col-md-4"><strong>Биография:</strong></div>
+                                <div class="col-md-8">{{ user.teacher_profile.bio|linebreaks }}</div>
+                            </div>
+                        {% endif %}
+
+                        <!-- Контакты преподавателя -->
+                        {% if user.teacher_profile.phone or user.teacher_profile.office %}
+                        <hr>
+                        <h5>Контакты</h5>
+                        <div class="row">
+                            {% if user.teacher_profile.phone %}
+                            <div class="col-md-6 mb-2">
+                                <strong>Телефон:</strong> {{ user.teacher_profile.phone }}
+                            </div>
+                            {% endif %}
+                            {% if user.teacher_profile.office %}
+                            <div class="col-md-6 mb-2">
+                                <strong>Кабинет:</strong> {{ user.teacher_profile.office }}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                    <!-- ПРОФИЛЬ НЕ ЗАПОЛНЕН -->
+                    {% else %}
+                        <div class="alert alert-warning">
+                            <strong>Профиль не заполнен!</strong>
+                            <a href="{% url 'edit_profile' %}" class="alert-link">Заполните профиль</a>, чтобы другие пользователи могли вас найти.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,348 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }} - Проектная платформа ГУУ{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Хлебные крошки -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'projects_list' %}">Проекты</a></li>
+            <li class="breadcrumb-item active">{{ project.title }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Основная информация -->
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1 class="card-title mb-0">{{ project.title }}</h1>
+                        <span class="badge {% if project.status == 'active' %}bg-success{% elif project.status == 'completed' %}bg-secondary{% else %}bg-warning{% endif %}">
+                            {{ project.get_status_display }}
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- Описание проекта -->
+                    <div class="mb-4">
+                        <h4>📋 Описание проекта</h4>
+                        <p class="project-description">{{ project.description|linebreaks }}</p>
+                    </div>
+
+                    <!-- Требования и навыки -->
+                    {% if project.requirements %}
+                    <div class="mb-4">
+                        <h4>🎯 Требования и навыки</h4>
+                        <p class="project-requirements">{{ project.requirements|linebreaks }}</p>
+                    </div>
+                    {% endif %}
+
+                    <!-- Необходимые роли -->
+                    {% if project.required_roles.all %}
+                    <div class="mb-4">
+                        <h4>👥 Требуемые роли в команде</h4>
+                        <div class="roles-grid">
+                            {% for role in project.required_roles.all %}
+                            <div class="role-card">
+                                <h5 class="role-name">{{ role.name }}</h5>
+                                {% if role.description %}
+                                <p class="role-description">{{ role.description }}</p>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Действия с проектом -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>🚀 Действия</h4>
+                </div>
+                <div class="card-body">
+                    <div class="action-buttons">
+                        {% if user.is_authenticated %}
+                            {% if project.author == user %}
+                                <!-- Действия для автора -->
+                                <a href="{% url 'edit_project' project.pk %}" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Редактировать проект
+                                </a>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    <i class="fas fa-trash"></i> Удалить проект
+                                </button>
+                                <a href="{% url 'project_applications' project_id=project.pk %}" class="btn btn-info">
+    <i class="fas fa-list-check"></i> Заявки на проект
+</a>
+                            {% else %}
+                                <!-- Действия для других пользователей -->
+                                {% if user_application %}
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-check-circle"></i>
+                                        Вы уже подали заявку на этот проект
+                                        <a href="{% url 'application_detail' pk=user_application.pk %}" class="btn btn-sm btn-outline-info ms-2">
+            Посмотреть заявку
+        </a>
+                                    </div>
+                                {% else %}
+                                    <a href="{% url 'apply_to_project' pk=project.pk %}" class="btn btn-success">
+        <i class="fas fa-paper-plane"></i> Подать заявку
+    </a>
+                                {% endif %}
+
+                                <button class="btn btn-outline-primary">
+                                    <i class="far fa-star"></i> В избранное
+                                </button>
+                            {% endif %}
+                        {% else %}
+                            <div class="alert alert-warning">
+                                <p>Для взаимодействия с проектом необходимо <a href="{% url 'login' %}?next={{ request.path }}">войти в систему</a></p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Боковая панель с дополнительной информацией -->
+        <div class="col-lg-4">
+            <!-- Информация об авторе -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>👤 Автор проекта</h5>
+                </div>
+                <div class="card-body">
+                    <div class="author-info">
+                        <div class="author-avatar">
+                            <img src="{% if project.author.avatar %}{{ project.author.avatar.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}"
+                                 alt="{{ project.author.get_full_name }}" class="avatar">
+                        </div>
+                        <div class="author-details">
+                            <h6>{{ project.author.get_full_name|default:project.author.username }}</h6>
+                            <p class="text-muted small">
+                                {% if project.author.user_type == 'student' %}
+                                    Студент
+                                {% elif project.author.user_type == 'teacher' %}
+                                    Преподаватель
+                                {% else %}
+                                    Пользователь
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ментор проекта -->
+            {% if project.teacher_mentor %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>👨‍🏫 Ментор проекта</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mentor-info">
+                        <div class="mentor-avatar">
+                            <img src="{% if project.teacher_mentor.avatar %}{{ project.teacher_mentor.avatar.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}"
+                                 alt="{{ project.teacher_mentor.get_full_name }}" class="avatar">
+                        </div>
+                        <div class="mentor-details">
+                            <h6>{{ project.teacher_mentor.get_full_name|default:project.teacher_mentor.username }}</h6>
+                            <p class="text-muted small">Преподаватель</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Участники проекта -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5>👥 Участники проекта</h5>
+                    <span class="badge bg-primary">{{ project.members.count }}</span>
+                </div>
+                <div class="card-body">
+                    {% if project.members.all %}
+                    <div class="members-list">
+                        {% for member in project.members.all %}
+                        <div class="member-item">
+                            <div class="member-avatar">
+                                <img src="{% if member.user.avatar %}{{ member.user.avatar.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}"
+                                     alt="{{ member.user.get_full_name }}" class="avatar-sm">
+                            </div>
+                            <div class="member-details">
+                                <h6 class="mb-0">{{ member.user.get_full_name|default:member.user.username }}</h6>
+                                <small class="text-muted">{{ member.role.name }}</small>
+                            </div>
+                            <div class="member-joined">
+                                <small class="text-muted">{{ member.joined_at|date:"d.m.Y" }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="text-muted">Пока нет участников</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Мета-информация -->
+            <div class="card">
+                <div class="card-header">
+                    <h5>📊 Информация о проекте</h5>
+                </div>
+                <div class="card-body">
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <strong>Создан:</strong>
+                            <span>{{ project.created_at|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Обновлен:</strong>
+                            <span>{{ project.updated_at|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Статус:</strong>
+                            <span class="badge {% if project.status == 'active' %}bg-success{% elif project.status == 'completed' %}bg-secondary{% else %}bg-warning{% endif %}">
+                                {{ project.get_status_display }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно удаления проекта -->
+{% if user.is_authenticated and project.author == user %}
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Удаление проекта</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Вы уверены, что хотите удалить проект "{{ project.title }}"?</p>
+                <p class="text-danger"><small>Это действие нельзя будет отменить.</small></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <form method="post" action="{% url 'delete_project' project.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Удалить проект</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<style>
+.project-description, .project-requirements {
+    white-space: pre-line;
+    line-height: 1.6;
+}
+
+.roles-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.role-card {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.role-name {
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.role-description {
+    color: #6c757d;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.author-info, .mentor-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.members-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.member-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.member-item:last-child {
+    border-bottom: none;
+}
+
+.member-details {
+    flex: 1;
+}
+
+.member-joined {
+    text-align: right;
+}
+
+.project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.meta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons .btn {
+        width: 100%;
+    }
+}
+</style>
+{% endblock %}

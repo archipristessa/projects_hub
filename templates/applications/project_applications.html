@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Заявки на проект "{{ project.title }}" - ГУУ{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'project_detail' pk=project.pk %}">{{ project.title }}</a></li>
+            <li class="breadcrumb-item active">Заявки на проект</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">
+                        <i class="bi bi-card-checklist"></i> Заявки на проект "{{ project.title }}"
+                    </h3>
+                    <a href="{% url 'project_detail' pk=project.pk %}" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-arrow-left"></i> Назад к проекту
+                    </a>
+                </div>
+
+                <!-- Статистика -->
+                <div class="card-body border-bottom">
+                    <div class="row text-center">
+                        <div class="col">
+                            <div class="card bg-light">
+                                <div class="card-body py-2">
+                                    <h5 class="mb-0">{{ stats.total }}</h5>
+                                    <small class="text-muted">Всего заявок</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-warning bg-opacity-10">
+                                <div class="card-body py-2">
+                                    <h5 class="mb-0 text-warning">{{ stats.pending }}</h5>
+                                    <small class="text-muted">Ожидают</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-success bg-opacity-10">
+                                <div class="card-body py-2">
+                                    <h5 class="mb-0 text-success">{{ stats.accepted }}</h5>
+                                    <small class="text-muted">Принято</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card bg-danger bg-opacity-10">
+                                <div class="card-body py-2">
+                                    <h5 class="mb-0 text-danger">{{ stats.rejected }}</h5>
+                                    <small class="text-muted">Отклонено</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Фильтры -->
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <div class="btn-group" role="group">
+                            <a href="?status=" class="btn btn-outline-secondary {% if not request.GET.status %}active{% endif %}">
+                                Все ({{ stats.total }})
+                            </a>
+                            <a href="?status=pending" class="btn btn-outline-warning {% if request.GET.status == 'pending' %}active{% endif %}">
+                                Ожидают ({{ stats.pending }})
+                            </a>
+                            <a href="?status=accepted" class="btn btn-outline-success {% if request.GET.status == 'accepted' %}active{% endif %}">
+                                Принятые ({{ stats.accepted }})
+                            </a>
+                            <a href="?status=rejected" class="btn btn-outline-danger {% if request.GET.status == 'rejected' %}active{% endif %}">
+                                Отклоненные ({{ stats.rejected }})
+                            </a>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="bi bi-filter"></i> Сортировка
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="?sort=newest">Сначала новые</a></li>
+                                <li><a class="dropdown-item" href="?sort=oldest">Сначала старые</a></li>
+                                <li><a class="dropdown-item" href="?sort=name">По имени</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Список заявок -->
+                    {% if applications %}
+                        <div class="list-group">
+                            {% for application in applications %}
+                                <div class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-start">
+                                        <div class="me-3">
+                                            <img src="{% static 'images/default-avatar.png' %}"
+                                                 alt="{{ application.applicant.get_full_name }}"
+                                                 class="rounded-circle" width="40" height="40">
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between">
+                                                <h5 class="mb-1">
+                                                    {{ application.applicant.get_full_name|default:application.applicant.username }}
+                                                </h5>
+                                                <span class="badge
+                                                    {% if application.status == 'pending' %}bg-warning
+                                                    {% elif application.status == 'accepted' %}bg-success
+                                                    {% else %}bg-danger{% endif %}">
+                                                    {{ application.get_status_display }}
+                                                </span>
+                                            </div>
+
+                                            <p class="mb-1 text-muted">
+                                                <i class="bi bi-envelope"></i> {{ application.applicant.email }}
+                                                {% if application.applicant.student_profile and application.applicant.student_profile.course %}
+                                                • {{ application.applicant.student_profile.course }} курс
+                                                {% endif %}
+                                            </p>
+
+                                            {% if application.message %}
+                                            <p class="mb-1 mt-2">
+                                                <small>{{ application.message|truncatechars:150 }}</small>
+                                            </p>
+                                            {% endif %}
+
+                                            <div class="mt-2">
+                                                <small class="text-muted">
+                                                    <i class="bi bi-clock"></i> {{ application.created_at|date:"d.m.Y H:i" }}
+                                                    {% if application.applied_role %}
+                                                    • <i class="bi bi-person-badge"></i> {{ application.applied_role.name }}
+                                                    {% endif %}
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Действия -->
+                                    <div class="mt-3 d-flex justify-content-end gap-2">
+                                        <a href="{% url 'application_detail' pk=application.pk %}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-eye"></i> Подробнее
+                                        </a>
+
+                                        {% if application.status == 'pending' %}
+                                            <a href="{% url 'process_application' pk=application.pk action='accept' %}"
+                                               class="btn btn-sm btn-success">
+                                                <i class="bi bi-check-circle"></i> Принять
+                                            </a>
+                                            <a href="{% url 'process_application' pk=application.pk action='reject' %}"
+                                               class="btn btn-sm btn-danger">
+                                                <i class="bi bi-x-circle"></i> Отклонить
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="bi bi-card-checklist display-1 text-muted"></i>
+                            <h4 class="mt-3">Нет заявок</h4>
+                            <p class="text-muted">На ваш проект еще никто не подал заявку</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Боковая панель -->
+        <div class="col-md-3">
+            <!-- Быстрые действия -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h6 class="mb-0">Быстрые действия</h6>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'project_detail' pk=project.pk %}" class="btn btn-outline-primary btn-sm w-100 mb-2">
+                        <i class="bi bi-kanban"></i> Перейти к проекту
+                    </a>
+                    <a href="{% url 'edit_project' pk=project.pk %}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                        <i class="bi bi-pencil"></i> Редактировать проект
+                    </a>
+                    <button class="btn btn-outline-info btn-sm w-100" data-bs-toggle="modal" data-bs-target="#shareModal">
+                        <i class="bi bi-share"></i> Поделиться
+                    </button>
+                </div>
+            </div>
+
+            <!-- Статус проекта -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">Статус проекта</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Статус:</span>
+                        <span class="badge {% if project.status == 'active' %}bg-success{% else %}bg-secondary{% endif %}">
+                            {{ project.get_status_display }}
+                        </span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span>Участников:</span>
+                        <span class="badge bg-primary">{{ project.members.count }}</span>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Свободных мест:</span>
+                        <span class="badge bg-info">
+                            {{ free_spaces_percent }}%
+                        </span>
+                    </div>
+
+                    {% if project.status == 'active' and stats.pending > 0 %}
+                    <div class="alert alert-warning mt-3 mb-0 p-2">
+                        <small>
+                            <i class="bi bi-exclamation-triangle"></i>
+                            Есть {{ stats.pending }} заявок, ожидающих рассмотрения
+                        </small>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для быстрого принятия/отклонения -->
+<div class="modal fade" id="quickActionModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Быстрое действие</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Контент будет заполняться JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// JavaScript для быстрых действий
+document.addEventListener('DOMContentLoaded', function() {
+    // Можно добавить AJAX для быстрого принятия/отклонения
+});
+</script>
+{% endblock %}
